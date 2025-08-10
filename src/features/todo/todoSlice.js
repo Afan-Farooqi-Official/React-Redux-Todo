@@ -19,7 +19,11 @@ export const todoSlice = createSlice({
         // payload is an object with a title property, initally function is for text input so payload accept text
         title: action.payload,
       };
-      state.todos.push(todo);
+      // Check if the todo is not empty before adding it
+      // This prevents adding empty todos
+      if (todo.title.trim() !== "") {
+        state.todos.push(todo);
+      } else alert("Input is empty");
     },
     removeTodo: (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
